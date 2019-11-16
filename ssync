@@ -1,5 +1,5 @@
 #!/bin/bash
-set -Ceu
+set -eu
 #cat << EOF
 #Most frequently used options:
 #
@@ -25,8 +25,9 @@ set -Ceu
 #EOF
 origin=$1
 to=$2
-rsync -ahvb --dry-run --backup-dir="removed_$(date +%Y-%m-%d_%H.%M.%S)" --delete ${origin%/} ${to} > ${to}/dry.log
+echo "rsync -azhvb --dry-run --backup-dir="removed_$(date +%Y-%m-%d_%H.%M.%S)" --delete ${origin%/} ${to}" > ${to}/dry.log
+echo "" >> ${to}/dry.log
+rsync -azhvb --dry-run --backup-dir="removed_$(date +%Y-%m-%d_%H.%M.%S)" --delete ${origin%/} ${to} >> ${to}/dry.log
 vim ${to}/dry.log 
 read -p 'Do you proceed on rsync? [enter]'
-rsync -ahvb --backup-dir="removed_$(date +%Y-%m-%d_%H.%M.%S)" --delete ${origin%/} ${to}
-#rsync -ahvb --dry-run --backup-dir="backup_$(date +\%Y-\%m-\%d)" --delete $origin $to
+rsync -azhvb --backup-dir="removed_$(date +%Y-%m-%d_%H.%M.%S)" --delete ${origin%/} ${to}
