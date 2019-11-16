@@ -4,7 +4,7 @@
 Options of the rsync command are selected carefully, enabling us to execute the rsync safely.
 
 ### Usage:
-    `ssync [original file/dir] [target file/dir]`
+`ssync [original file/dir] [target file/dir]`
 
 ### Outline of my script
 1. Dry-run is executed to confirm your backup is done correctly.
@@ -12,8 +12,13 @@ Options of the rsync command are selected carefully, enabling us to execute the 
 3. Terminal asks you if you wana go on or not. If ok, enter.
 4. Backup is started.
 
+### Important notes
+`-b` and `–-backup-dir=[target path]` are active, 
+so even though `--delete` option removes the files that do not exist in the original directory but in the target one, 
+the files are saved to `[target path]`.
+
 ### Active options
-- --delete is active, so the files in target directory that are not in the original are removed.
-- --dry-run is active and its log is shown. So you can check if you can go on to syncing.
-- -a is active for archive
-- -z is active for complession
+- `--delete` is active, so the files in target directory that are not in the original are removed.
+- `--dry-run` is active and its log is shown. So you can check if you can go on to syncing.
+- `-a` is active for archive
+- `-z` is active for complession
