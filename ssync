@@ -1,0 +1,29 @@
+#!/bin/bash
+set -Ceu
+#cat << EOF
+#Most frequently used options:
+#
+#-b  
+#    Makes backups of any files in the destination directory that aren’t included in the source. 
+#    Commonly used with –backup-dir and –delete switches.
+#
+#–backup-dir=[path]
+#    Allows you to define a name for the backup directory that will be used by the -b option.
+#
+#–delete 
+#    Removes files present in the destination directory that are absent from the source directory.
+#
+#-z 
+#    Compress; uses compression during data transfer. Most often used when using rsync with a remote system.
+#
+#-n 
+#    Dry run; no files are moved. Instead, rsync displays what the results would have been. 
+#    Use -n with the -v option to gather additional information.
+#
+#cf. https://blog.macsales.com/45185-mac-101-learn-the-power-of-rsync-for-backup-remote-archive-systems/
+#
+#EOF
+origin=$1
+to=$2
+rsync -ahvb --backup-dir="bak_${origin}$(date +%Y-%m-%d_%H.%M.%S)" --delete $origin $to
+#rsync -ahvb --dry-run --backup-dir="backup_$(date +\%Y-\%m-\%d)" --delete $origin $to
