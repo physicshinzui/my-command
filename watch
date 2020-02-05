@@ -1,0 +1,10 @@
+#/bin/bash
+set -eu
+
+while :; 
+  do 
+  clear
+  date
+  $1
+  sleep $2
+done
