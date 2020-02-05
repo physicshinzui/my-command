@@ -22,3 +22,7 @@ the files are saved to `[target path]`.
 - `--dry-run` is active and its log is shown. So you can check if you can go on to syncing.
 - `-a` is active for archive
 - `-z` is active for complession
+
+## watch (Emulator of the linux watch command)
+### Usage:
+`watch [command] [update interval [sec]]`
