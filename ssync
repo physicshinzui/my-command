@@ -1,6 +1,5 @@
 #!/bin/bash
 set -eu
-#cat << EOF
 #Most frequently used options:
 #
 #-b  
@@ -22,7 +21,12 @@ set -eu
 #
 #cf. https://blog.macsales.com/45185-mac-101-learn-the-power-of-rsync-for-backup-remote-archive-systems/
 #
-#EOF
+cat << EOF
+
+Usage:
+    $0 [target] [destination]
+
+EOF
 origin=$1
 to=$2
 echo "rsync -azhvb --dry-run --backup-dir="removed_$(date +%Y-%m-%d_%H.%M.%S)" --delete ${origin%/} ${to}" > ${to}/dry.log
