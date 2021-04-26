@@ -21,6 +21,9 @@ set -eu
 #
 #cf. https://blog.macsales.com/45185-mac-101-learn-the-power-of-rsync-for-backup-remote-archive-systems/
 #
+#--progress
+#   Show progres bar for each file
+
 cat << EOF
 
 Usage:
@@ -34,4 +37,4 @@ echo "" >> ${to}/dry.log
 rsync -azhvb --dry-run --backup-dir="removed_$(date +%Y-%m-%d_%H.%M.%S)" --delete ${origin%/} ${to} >> ${to}/dry.log
 vim ${to}/dry.log 
 read -p 'Do you proceed on rsync? [enter]'
-rsync -azhvb --backup-dir="removed_$(date +%Y-%m-%d_%H.%M.%S)" --delete ${origin%/} ${to}
+rsync -azhvb --progress --backup-dir="removed_$(date +%Y-%m-%d_%H.%M.%S)" --delete ${origin%/} ${to}
