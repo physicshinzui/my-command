@@ -1,5 +1,8 @@
 # Contents
 
+# Setting 
+`export MYCMDPATH=path_to_this:$MYCMDPATH`
+
 ## ssync (based on rsync)
 Options of the rsync command are selected carefully, enabling us to execute the rsync safely.
 
@@ -26,3 +29,9 @@ the files are saved to `[target path]`.
 ## watch (Emulator of the linux watch command)
 ### Usage:
 `watch [command] [update interval [sec]]`
+
+## spot (Search words for directories)
+`spot [keywords] [path]`
+
+## new (Create date directories under the current directory)
+`new`

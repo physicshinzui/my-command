@@ -1,0 +1,7 @@
+#!/bin/bash
+set -Ceu
+date=`date '+%Y/%m/%d'`
+echo "The directory $date has been created if it did not exist."
+mkdir -pv $date
+cp -i ${MYCMDPATH}/template.md ${date}
+open ${date}/template.md
