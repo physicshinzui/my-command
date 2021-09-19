@@ -1,11 +1,8 @@
 #!/bin/bash
 set -Ceu
-date=`date '+%Y/%m/%d'`
-
-echo "The directory $date has been created if it did not exist."
-mkdir -pv $date
 
 read -p "b(blank)/d(daily)/p(paper)?:" doctype
+
 if [ $doctype == "b" ]; then 
     echo "---"  > note.md
     echo "title: " >> note.md
@@ -15,6 +12,9 @@ if [ $doctype == "b" ]; then
     open note.md
 
 elif [ $doctype == "d" ] ; then 
+    date=`date '+%Y/%m/%d'`
+    echo "The directory $date has been created if it did not exist."
+    mkdir -pv $date
     echo "---" > daily.md
     echo "title: " >> daily.md
     echo "date: `date '+%Y-%m-%d'`" >> daily.md
