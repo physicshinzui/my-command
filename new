@@ -1,7 +1,62 @@
 #!/bin/bash
 set -Ceu
 date=`date '+%Y/%m/%d'`
+
 echo "The directory $date has been created if it did not exist."
 mkdir -pv $date
-cp -i ${MYCMDPATH}/template.md ${date}
-open ${date}/template.md
+
+read -p "b(blank)/d(daily)/p(paper)?:" doctype
+if [ $doctype == "b" ]; then 
+    echo "---"  > note.md
+    echo "title: " >> note.md
+    echo "date: `date '+%Y-%m-%d'`" >> note.md
+    echo "tag: " >> note.md
+    echo "---" >> note.md
+    open note.md
+
+elif [ $doctype == "d" ] ; then 
+    echo "---" > daily.md
+    echo "title: " >> daily.md
+    echo "date: `date '+%Y-%m-%d'`" >> daily.md
+    echo "tag: " >> daily.md
+    echo "---" >> daily.md
+    mv daily.md  ${date}
+    open ${date}/daily.md
+
+elif [ $doctype == "p" ] ; then
+    echo "---" > paper.md
+    echo "title: " >> paper.md
+    echo "date: `date '+%Y-%m-%d'`" >> paper.md
+    echo "tag: " >> paper.md
+    echo "---" >> paper.md
+    cat << EOF >> paper.md
+# Title
+
+# Publication date
+
+# Author
+
+# Contribution sumamry
+"Author" did "Method" to solve "Movivation" and found "Insight".
+
+# Motivation
+- What issues or problems did they try to sovle?
+
+- What was lacking in exisinting research?
+
+# Methods
+## What exp or simulation were done?
+
+## Why their methods are suitable?
+
+# Insight
+
+# Comments on Each Section, Figures, and Tables
+
+EOF
+
+else
+    echo "Error. No such doc type exists."
+
+fi
+
