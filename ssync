@@ -32,23 +32,24 @@ Usage:
 EOF
 origin=$1
 to=$2
+bk_dir_name="removed_$(date +%Y-%m-%d_%H.%M.%S)"
 
 read -p "Do you have a key? [y/n]:" iskey
 
 if [ $iskey == "n" ]; then
-    echo "rsync -azhvb --dry-run --backup-dir="removed_$(date +%Y-%m-%d_%H.%M.%S)" --delete ${origin%/} ${to}" > ${to}/dry.log
+    echo "rsync -azhvb --dry-run --backup-dir=$bk_dir_name --delete ${origin%/} ${to}" > ${to}/dry.log
     echo "" >> ${to}/dry.log
-    rsync -azhvb --dry-run --backup-dir="removed_$(date +%Y-%m-%d_%H.%M.%S)" --delete ${origin%/} ${to} >> ${to}/dry.log
+    rsync -azhvb --dry-run --backup-dir=$bk_dir_name --delete ${origin%/} ${to} >> ${to}/dry.log
     vim ${to}/dry.log 
     read -p 'Do you proceed on rsync? [enter]'
-    rsync -azhvb --progress --backup-dir="removed_$(date +%Y-%m-%d_%H.%M.%S)" --delete ${origin%/} ${to}
+    rsync -azhvb --progress --backup-dir=$bk_dir_name --delete ${origin%/} ${to}
 
 elif [ $iskey == "y" ]; then  
     read -p "Type the path to the key:" pathtokey
-    echo "rsync -azhvb --dry-run --backup-dir="removed_$(date +%Y-%m-%d_%H.%M.%S)" --delete -e "ssh -i $pathtokey" ${origin%/} ${to}" > ${to}/dry.log
+    echo "rsync -azhvb --dry-run --backup-dir=$bk_dir_name --delete -e "ssh -i $pathtokey" ${origin%/} ${to}" > ${to}/dry.log
     echo "" >> ${to}/dry.log
-    rsync -azhvb --dry-run --backup-dir="removed_$(date +%Y-%m-%d_%H.%M.%S)" --delete -e "ssh -i $pathtokey" ${origin%/} ${to} >> ${to}/dry.log
+    rsync -azhvb --dry-run --backup-dir=$bk_dir_name --delete -e "ssh -i $pathtokey" ${origin%/} ${to} >> ${to}/dry.log
     vim ${to}/dry.log 
     read -p 'Do you proceed on rsync? [enter]'
-    rsync -azhvb --progress --backup-dir="removed_$(date +%Y-%m-%d_%H.%M.%S)" --delete -e "ssh -i $pathtokey" ${origin%/} ${to}
+    rsync -azhvb --progress --backup-dir=$bk_dir_name --delete -e "ssh -i $pathtokey" ${origin%/} ${to}
 fi
