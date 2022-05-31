@@ -1,0 +1,5 @@
+#!/bin/bash 
+markdown=$1
+bib=$2
+out_ext=$3
+pandoc --citeproc $markdown --bibliography $bib -o "${markdown%.*}.${out_ext}"
