@@ -4,14 +4,17 @@ cat <<EOF
 
 ------------------------------------------------------------
 Usage: 
-    $0 [\$1: keywords] [\$2: target path to be searched for]
+    $0 [\$1: keywords] 
 
 This guy searches directories for files including keywords.
+
+NOTE
+- This script is specialised for the search for markdown files.
+- It searches the current dirctory recursively for all the markdown files.
 
 ------------------------------------------------------------
 EOF
 
 keyword=$1
-target_path=$2
 echo "# Files including the keyword '$keyword': "
-grep --ignore-case -e $keyword --files-with-matches --recursive $target_path --include=\*.md
+grep --ignore-case -e $keyword --files-with-matches --recursive $PWD --include=\*.md
